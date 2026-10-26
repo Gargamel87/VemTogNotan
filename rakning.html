@@ -28,7 +28,7 @@
             
             <div class="flex flex-col sm:flex-row gap-3">
                 <input type="text" id="roomInput" placeholder="T.ex. stugresan-2026" class="flex-1 px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base">
-                <button onclick="joinRoom()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl transition duration-200 cursor-pointer shadow-sm">
+                <button onclick="window.joinRoom()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl transition duration-200 cursor-pointer shadow-sm">
                     Öppna rum
                 </button>
             </div>
@@ -43,7 +43,7 @@
                     <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Aktivt rum</span>
                     <h3 id="currentRoomDisplay" class="text-lg font-bold text-blue-900"></h3>
                 </div>
-                <button onclick="copyRoomLink()" class="w-full sm:w-auto bg-white hover:bg-blue-100 text-blue-700 font-medium px-4 py-2.5 rounded-xl border border-blue-200 text-sm transition duration-200 cursor-pointer flex items-center justify-center gap-2 shadow-xs">
+                <button onclick="window.copyRoomLink()" class="w-full sm:w-auto bg-white hover:bg-blue-100 text-blue-700 font-medium px-4 py-2.5 rounded-xl border border-blue-200 text-sm transition duration-200 cursor-pointer flex items-center justify-center gap-2 shadow-xs">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                     </svg>
@@ -52,21 +52,22 @@
             </div>
 
             <!-- Participants Card -->
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
-                <h2 class="text-lg font-semibold text-slate-900 mb-3">1. Deltagare</h2>
-                <div class="flex gap-2 mb-4">
-                    <input type="text" id="personName" placeholder="Namn på person" class="flex-1 px-4 py-2.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-base">
-                    <button onclick="addPerson()" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold px-5 py-2.5 rounded-xl transition duration-200 cursor-pointer">
-                        Lägg till
-                    </button>
-                </div>
-                <div id="personList" class="flex flex-wrap gap-2">
-                    <!-- Populated dynamically -->
-                    <span class="text-slate-400 text-sm italic">Inga deltagare tillagda ännu.</span>
-                </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+            <h2 class="text-lg font-semibold text-slate-900 mb-3">1. Deltagare & Swish-nummer</h2>
+            <div class="flex flex-col sm:flex-row gap-2 mb-4">
+                <input type="text" id="personName" placeholder="Namn på person" class="flex-1 px-4 py-2.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-base">
+                <input type="tel" id="personPhone" placeholder="Swish-nr (valfritt, t.ex. 0701234567)" class="flex-1 px-4 py-2.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-base">
+                <button onclick="window.addPerson()" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold px-5 py-2.5 rounded-xl transition duration-200 cursor-pointer">
+                    Lägg till
+                </button>
             </div>
+            <div id="personList" class="flex flex-col gap-2">
+                <!-- Populated dynamically -->
+                <span class="text-slate-400 text-sm italic">Inga deltagare tillagda ännu.</span>
+            </div>
+        </div>
 
-            <!-- Expenses Card -->
+        <!-- Expenses Card -->
             <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
                 <h2 class="text-lg font-semibold text-slate-900 mb-3">2. Lägg till utgift</h2>
                 <div class="space-y-3">
@@ -77,7 +78,7 @@
                             <option value="">Vem betalade?</option>
                         </select>
                     </div>
-                    <button onclick="addExpense()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition duration-200 cursor-pointer shadow-sm">
+                    <button onclick="window.addExpense()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition duration-200 cursor-pointer shadow-sm">
                         Lägg till utgift
                     </button>
                 </div>
@@ -99,7 +100,7 @@
             </div>
 
             <div class="text-center pt-2">
-                <button onclick="leaveRoom()" class="text-sm text-slate-500 hover:text-slate-800 underline cursor-pointer">
+                <button onclick="window.leaveRoom()" class="text-sm text-slate-500 hover:text-slate-800 underline cursor-pointer">
                     Byt rum eller avsluta
                 </button>
             </div>
@@ -112,7 +113,7 @@
         <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl border border-slate-100 text-center">
             <h3 id="modalTitle" class="text-lg font-bold text-slate-900 mb-2">Meddelande</h3>
             <p id="modalMessage" class="text-slate-600 text-sm mb-6"></p>
-            <button onclick="closeModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl transition duration-200 cursor-pointer">
+            <button onclick="window.closeModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl transition duration-200 cursor-pointer">
                 OK
             </button>
         </div>
@@ -161,18 +162,18 @@
                 const hash = window.location.hash.replace('#', '').trim();
                 if (hash) {
                     document.getElementById('roomInput').value = hash;
-                    joinRoom();
+                    window.joinRoom();
                 }
             } catch (err) {
                 console.error("Firebase init error:", err);
-                showModal("Anslutningsfel", "Kunde inte ansluta till molntjänsten.");
+                window.showModal("Anslutningsfel", "Kunde inte ansluta till molntjänsten.");
             }
         }
 
         window.joinRoom = async function() {
             const inputVal = document.getElementById('roomInput').value.trim();
             if (!inputVal) {
-                showModal("Observera", "Vänligen ange ett namn för rummet.");
+                window.showModal("Observera", "Vänligen ange ett namn för rummet.");
                 return;
             }
 
@@ -199,7 +200,6 @@
             if (!auth.currentUser || !currentRoomId) return;
 
             // RULE 1: STRICT PATH for public shared data
-            // /artifacts/{appId}/public/data/{collectionName} -> we use specific document for the room
             const roomDocRef = doc(db, 'artifacts', appId, 'public', 'data', `rooms_${currentRoomId}`);
 
             if (unsubscribeRoom) unsubscribeRoom();
@@ -209,13 +209,12 @@
                     roomDataCache = docSnap.data();
                 } else {
                     roomDataCache = { persons: [], expenses: [] };
-                    // Initialize empty room doc
                     setDoc(roomDocRef, roomDataCache).catch(err => console.error("Init room error:", err));
                 }
                 updateUI();
             }, (error) => {
                 console.error("Snapshot error:", error);
-                showModal("Synkningsfel", "Kunde inte läsa uppdateringar i realtid.");
+                window.showModal("Synkningsfel", "Kunde inte läsa uppdateringar i realtid.");
             });
         }
 
@@ -226,22 +225,32 @@
                 await setDoc(roomDocRef, roomDataCache);
             } catch (err) {
                 console.error("Save error:", err);
-                showModal("Sparfel", "Kunde inte spara ändringen till molnet.");
+                window.showModal("Sparfel", "Kunde inte spara ändringen till molnet.");
             }
         }
 
         window.addPerson = async function() {
             const nameInput = document.getElementById('personName');
+            const phoneInput = document.getElementById('personPhone');
             const name = nameInput.value.trim();
+            const phone = phoneInput.value.trim();
+            
             if (!name) return;
 
-            if (roomDataCache.persons.includes(name)) {
-                showModal("Redan tillagd", "Denna person finns redan i rummet.");
-                return;
+            const existingIndex = roomDataCache.persons.findIndex(p => p.name.toLowerCase() === name.toLowerCase());
+            if (existingIndex !== -1) {
+                if (phone) {
+                    roomDataCache.persons[existingIndex].phone = phone;
+                } else {
+                    window.showModal("Redan tillagd", "Denna person finns redan i rummet.");
+                    return;
+                }
+            } else {
+                roomDataCache.persons.push({ name, phone: phone || '' });
             }
 
-            roomDataCache.persons.push(name);
             nameInput.value = '';
+            phoneInput.value = '';
             await saveToFirestore();
         }
 
@@ -251,13 +260,19 @@
             const payer = document.getElementById('expensePayer').value;
 
             if (!desc || isNaN(amount) || amount <= 0 || !payer) {
-                showModal("Ofullständiga uppgifter", "Vänligen fyll i beskrivning, giltigt belopp och vem som betalade.");
+                window.showModal("Ofullständiga uppgifter", "Vänligen fyll i beskrivning, giltigt belopp och vem som betalade.");
                 return;
             }
 
             roomDataCache.expenses.push({ desc, amount, payer });
             document.getElementById('expenseDesc').value = '';
             document.getElementById('expenseAmount').value = '';
+            document.getElementById('expensePayer').value = '';
+            await saveToFirestore();
+        }
+
+        window.deletePerson = async function(index) {
+            roomDataCache.persons.splice(index, 1);
             await saveToFirestore();
         }
 
@@ -270,7 +285,7 @@
             const url = window.location.href;
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(url).then(() => {
-                    showModal("Länk kopierad!", "Dela länken med dina vänner så kan de gå med i samma rum och lägga till utgifter.");
+                    window.showModal("Länk kopierad!", "Dela länken med dina vänner så kan de gå med i samma rum och lägga till utgifter.");
                 }).catch(() => {
                     fallbackCopy(url);
                 });
@@ -288,30 +303,33 @@
             textArea.select();
             try {
                 document.execCommand('copy');
-                showModal("Länk kopierad!", "Dela länken med dina vänner så kan de gå med i samma rum.");
+                window.showModal("Länk kopierad!", "Dela länken med dina vänner så kan de gå med i samma rum.");
             } catch (err) {
-                showModal("Kunde inte kopiera", "Kopiera länk-adressen manuellt från webbläsarens adressfält.");
+                window.showModal("Kunde inte kopiera", "Kopiera länk-adressen manuellt från webbläsarens adressfält.");
             }
             document.body.removeChild(textArea);
         }
 
         function updateUI() {
-            // Render persons
             const personList = document.getElementById('personList');
             if (roomDataCache.persons.length === 0) {
                 personList.innerHTML = '<span class="text-slate-400 text-sm italic">Inga deltagare tillagda ännu.</span>';
             } else {
-                personList.innerHTML = roomDataCache.persons.map(p => 
-                    `<span class="bg-slate-100 text-slate-800 font-medium px-3 py-1.5 rounded-lg text-sm flex items-center gap-1">${p}</span>`
-                ).join('');
+                personList.innerHTML = roomDataCache.persons.map((p, index) => `
+                    <div class="bg-slate-50 border border-slate-100 p-3 rounded-xl flex items-center justify-between text-sm">
+                        <div class="flex items-center gap-3">
+                            <span class="font-semibold text-slate-900">👤 ${p.name}</span>
+                            ${p.phone ? `<span class="text-xs bg-emerald-50 text-emerald-700 px-2 py-1 rounded-md border border-emerald-100 font-medium">📱 ${p.phone}</span>` : '<span class="text-xs text-slate-400 italic">Inget Swish-nr</span>'}
+                        </div>
+                        <button onclick="window.deletePerson(${index})" class="text-red-500 hover:text-red-700 text-xs font-semibold cursor-pointer p-1">Ta bort</button>
+                    </div>
+                `).join('');
             }
 
-            // Render payer dropdown
             const payerSelect = document.getElementById('expensePayer');
             payerSelect.innerHTML = '<option value="">Vem betalade?</option>' + 
-                roomDataCache.persons.map(p => `<option value="${p}">${p}</option>`).join('');
+                roomDataCache.persons.map(p => `<option value="${p.name}">${p.name}</option>`).join('');
 
-            // Render expense list
             const expenseList = document.getElementById('expenseList');
             if (roomDataCache.expenses.length === 0) {
                 expenseList.innerHTML = '<li class="py-3 text-slate-400 text-sm italic">Inga utgifter registrerade.</li>';
@@ -321,7 +339,7 @@
                         <div>
                             <span class="font-semibold text-slate-900">${e.payer}</span> betalade <span class="font-bold text-blue-600">${e.amount.toFixed(2)} kr</span> för <span class="text-slate-700">"${e.desc}"</span>
                         </div>
-                        <button onclick="deleteExpense(${index})" class="text-red-500 hover:text-red-700 p-1 text-xs font-semibold cursor-pointer">Ta bort</button>
+                        <button onclick="window.deleteExpense(${index})" class="text-red-500 hover:text-red-700 p-1 text-xs font-semibold cursor-pointer">Ta bort</button>
                     </li>
                 `).join('');
             }
@@ -331,17 +349,23 @@
 
         function calculateResults() {
             const resultOutput = document.getElementById('resultOutput');
-            const persons = roomDataCache.persons;
+            const personsObj = roomDataCache.persons;
             const expenses = roomDataCache.expenses;
 
-            if (persons.length === 0) {
+            if (personsObj.length === 0) {
                 resultOutput.innerHTML = '<em class="text-slate-400">Lägg till minst en deltagare för att börja räkna.</em>';
                 return;
             }
 
+            const personNames = personsObj.map(p => p.name);
             let totalSum = 0;
             let paidBy = {};
-            persons.forEach(p => paidBy[p] = 0);
+            let phoneMap = {};
+            
+            personsObj.forEach(p => {
+                paidBy[p.name] = 0;
+                phoneMap[p.name] = p.phone || '';
+            });
 
             expenses.forEach(e => {
                 totalSum += e.amount;
@@ -350,16 +374,16 @@
                 }
             });
 
-            let perPersonShare = totalSum / persons.length;
+            let perPersonShare = totalSum / personNames.length;
 
             let html = `<div class="space-y-2">`;
             html += `<div class="flex justify-between text-sm"><span class="text-slate-600">Total summa:</span> <span class="font-bold text-slate-900">${totalSum.toFixed(2)} kr</span></div>`;
             html += `<div class="flex justify-between text-sm"><span class="text-slate-600">Att betala per person:</span> <span class="font-bold text-blue-600">${perPersonShare.toFixed(2)} kr</span></div>`;
             html += `<hr class="border-slate-200 my-2">`;
-            html += `<strong class="text-xs uppercase tracking-wider text-slate-500 block mb-1">Skulder och överföringar:</strong><ul class="space-y-1">`;
+            html += `<strong class="text-xs uppercase tracking-wider text-slate-500 block mb-1">Skulder och Swish-överföringar:</strong><ul class="space-y-2">`;
 
             let balances = {};
-            persons.forEach(p => {
+            personNames.forEach(p => {
                 balances[p] = paidBy[p] - perPersonShare;
             });
 
@@ -376,7 +400,29 @@
                 creditors.forEach(creditor => {
                     if (debtor.amount > 0 && creditor.amount > 0) {
                         let transfer = Math.min(debtor.amount, creditor.amount);
-                        html += `<li class="text-sm bg-white p-2 rounded-lg border border-slate-100 flex items-center justify-between"><span>👤 <strong>${debtor.name}</strong> swishar</span> <span class="font-bold text-emerald-600">${transfer.toFixed(2)} kr</span> <span>till <strong>${creditor.name}</strong></span></li>`;
+                        let creditorPhone = phoneMap[creditor.name];
+                        
+                        let swishActionHtml = '';
+                        if (creditorPhone) {
+                            const cleanPhone = creditorPhone.replace(/[^0-9+]/g, '');
+                            swishActionHtml = `
+                                <a href="swish://payment?data=%7B%22version%22%3A1%2C%22value%22%3A${transfer.toFixed(2)}%2C%22currency%22%3A%22SEK%22%2C%22payee%22%3A%7B%22value%22%3A%22${cleanPhone}%22%7D%7D" 
+                                   class="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition duration-200 shadow-xs">
+                                   📱 Swish ${transfer.toFixed(2)} kr
+                                </a>
+                            `;
+                        } else {
+                            swishActionHtml = `<span class="text-xs text-amber-600 font-medium bg-amber-50 px-2 py-1 rounded border border-amber-100">Inget Swish-nr angivet</span>`;
+                        }
+
+                        html += `
+                            <li class="text-sm bg-white p-3 rounded-xl border border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                                <div>
+                                    <strong>${debtor.name}</strong> betalar <strong class="text-emerald-600">${transfer.toFixed(2)} kr</strong> till <strong>${creditor.name}</strong> ${creditorPhone ? `<span class="text-xs text-slate-500">(${creditorPhone})</span>` : ''}
+                                </div>
+                                <div>${swishActionHtml}</div>
+                            </li>
+                        `;
                         debtor.amount -= transfer;
                         creditor.amount -= transfer;
                         transactionsCount++;
@@ -392,7 +438,6 @@
             resultOutput.innerHTML = html;
         }
 
-        // Run initialization on load
         window.onload = initFirebase;
     </script>
 
